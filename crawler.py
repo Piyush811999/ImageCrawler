@@ -6,6 +6,7 @@ from urllib.parse import urljoin, urlparse
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 
+# Function to download image from a URL
 def download_image(img_url, page_url, depth, folder="crawler_images"):
     os.makedirs(folder, exist_ok=True)
     
@@ -32,7 +33,7 @@ def download_image(img_url, page_url, depth, folder="crawler_images"):
         print(f"Failed to download {img_url}: {e}")
         return None
 
-
+# Function to crawl a URL recursively to a certain depth and download images
 def crawl(start_url, depth, visited=set(), images=[]):
     if depth < 0 or start_url in visited:
         return images
@@ -80,7 +81,7 @@ def crawl(start_url, depth, visited=set(), images=[]):
     
     return images
 
-
+# Function to save the image data in index.json
 def save_index(images, folder="crawler_images"):
     os.makedirs(folder, exist_ok=True)
     index_file = os.path.join(folder, "index.json")
